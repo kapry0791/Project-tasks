@@ -6,8 +6,8 @@
 // ── 1. SUPABASE SETUP ────────────────────────────────────────
 // Replace these two values with YOUR Supabase project details
 // (You will get them from supabase.com → your project → Settings → API)
-const SUPABASE_URL = "YOUR_SUPABASE_URL";       // e.g. https://abcxyz.supabase.co
-const SUPABASE_ANON_KEY = "YOUR_SUPABASE_ANON_KEY";  // long string starting with eyJ
+const SUPABASE_URL = "https://kylwawpednkiwvyvjjfa.supabase.co";      
+const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imt5bHdhd3BlZG5raXd2eXZqamZhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY1MjY4MTksImV4cCI6MjA5MjEwMjgxOX0.PsyoCp3QapZTFyDvimIUZ3YijZsE4vsisIv8tVKjJCI";  // long string starting with eyJ
 
 // Create the Supabase client (supabase-js is loaded via CDN in index.html)
 const { createClient } = supabase;
