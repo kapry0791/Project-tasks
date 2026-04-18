@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Project Tasks</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ── HEADER ── -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="logo">
+        <span class="logo-icon">✦</span>
+        <span class="logo-text">ProjectTasks</span>
+      </div>
+      <div class="header-meta">
+        <span id="today-date"></span>
+      </div>
+    </div>
+  </header>
+
+  <!-- ── MAIN ── -->
+  <main class="container">
+
+    <!-- Page Title -->
+    <section class="page-hero">
+      <h1 class="page-title">Your Tasks</h1>
+      <p class="page-sub">Stay organized. Stay ahead.</p>
+    </section>
+
+    <!-- Stats Bar -->
+    <section class="stats-bar">
+      <div class="stat-card">
+        <span class="stat-num" id="stat-total">0</span>
+        <span class="stat-label">Total</span>
+      </div>
+      <div class="stat-card accent-pending">
+        <span class="stat-num" id="stat-pending">0</span>
+        <span class="stat-label">Pending</span>
+      </div>
+      <div class="stat-card accent-done">
+        <span class="stat-num" id="stat-done">0</span>
+        <span class="stat-label">Completed</span>
+      </div>
+      <div class="stat-card">
+        <div class="progress-ring-wrap">
+          <svg class="ring" viewBox="0 0 36 36">
+            <circle class="ring-bg" cx="18" cy="18" r="15.9"/>
+            <circle class="ring-fill" id="ring-fill" cx="18" cy="18" r="15.9"
+              stroke-dasharray="0 100" stroke-dashoffset="25"/>
+          </svg>
+          <span class="ring-pct" id="ring-pct">0%</span>
+        </div>
+        <span class="stat-label">Progress</span>
+      </div>
+    </section>
+
+    <!-- Add Task Form -->
+    <section class="add-task-section">
+      <div class="add-card">
+        <h2 class="add-heading">Add a new task</h2>
+        <div class="add-row">
+          <input
+            type="text"
+            id="task-input"
+            class="task-input"
+            placeholder="e.g. Design the landing page…"
+            maxlength="200"
+          />
+          <select id="priority-select" class="priority-select">
+            <option value="low">Low</option>
+            <option value="medium" selected>Medium</option>
+            <option value="high">High</option>
+          </select>
+          <button id="add-btn" class="btn-add" onclick="addTask()">
+            <span>+ Add</span>
+          </button>
+        </div>
+        <p class="input-hint" id="input-error"></p>
+      </div>
+    </section>
+
+    <!-- Filter Tabs -->
+    <div class="filter-row">
+      <button class="filter-btn active" data-filter="all"    onclick="setFilter('all')">All</button>
+      <button class="filter-btn"        data-filter="pending" onclick="setFilter('pending')">Pending</button>
+      <button class="filter-btn"        data-filter="done"    onclick="setFilter('done')">Completed</button>
+      <div class="spacer"></div>
+      <button class="btn-clear-done" onclick="clearCompleted()">Clear completed</button>
+    </div>
+
+    <!-- Task List -->
+    <section id="task-list" class="task-list">
+      <!-- tasks injected here -->
+    </section>
+
+    <!-- Empty State -->
+    <div id="empty-state" class="empty-state hidden">
+      <div class="empty-icon">◎</div>
+      <p class="empty-title">Nothing here yet</p>
+      <p class="empty-sub">Add your first task above to get started.</p>
+    </div>
+
+  </main>
+
+  <!-- ── TOAST ── -->
+  <div id="toast" class="toast"></div>
+
+  <!-- ── EDIT MODAL ── -->
+  <div id="modal-overlay" class="modal-overlay hidden" onclick="closeModal(event)">
+    <div class="modal-card">
+      <h3 class="modal-title">Edit task</h3>
+      <input type="text" id="modal-input" class="task-input" maxlength="200"/>
+      <select id="modal-priority" class="priority-select" style="margin-top:12px;width:100%"></select>
+      <div class="modal-actions">
+        <button class="btn-cancel" onclick="closeModalDirect()">Cancel</button>
+        <button class="btn-save"   onclick="saveEdit()">Save changes</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="app.js"></script>
+</body>
+</html>
