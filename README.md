@@ -88,3 +88,10 @@ tasks
 ├── completed   BOOLEAN    false = pending, true = done
 └── created_at  TIMESTAMP  Auto-set on insert
 ```
+
+<div align="center">
+
+Built by Kishore B &nbsp;·&nbsp; HTML + CSS + JS + Supabase + Netlify
+
+</div>
+
