@@ -1,9 +1,9 @@
 # ✦ Project Tasks
 
-A clean, fully functional task manager with real-time Supabase backend, built as part of an internship assignment.
+A clean, fully functional task manager with a real-time Supabase backend, built as part of an internship assignment, hosted using Netlify and code imported using Git.
 
-**Live Demo:** [Replace with your Netlify link after deployment]  
-**Repository:** [Replace with your GitHub link]
+Live Demo: https://kissanth18.netlify.app/ 
+Repository: https://github.com/kapry0791/Project-tasks
 
 ---
 
@@ -11,10 +11,10 @@ A clean, fully functional task manager with real-time Supabase backend, built as
 
 | Layer       | Technology |
 |-------------|-----------|
-| Frontend    | HTML5, CSS3, Vanilla JavaScript |
+| Frontend    | HTML5, CSS3, JavaScript |
 | Backend     | [Supabase](https://supabase.com) (PostgreSQL + REST API) |
 | Hosting     | [Netlify](https://netlify.com) |
-| Fonts       | Google Fonts (DM Serif Display + DM Sans) |
+
 
 ---
 
@@ -32,92 +32,37 @@ A clean, fully functional task manager with real-time Supabase backend, built as
 
 ---
 
-## Setup Steps
+#How I Built It
 
-### 1. Create a Supabase Project
+1. Started with the basics
+I began by setting up three core files — index.html, style.css, and app.js. The initial focus was on building a simple, functional UI with an input field, a task list, and filter buttons (All / Pending / Completed).
 
-1. Go to [supabase.com](https://supabase.com) and create a free account
-2. Click **New Project** → give it a name → click **Create**
-3. Wait about 1 minute for the project to provision
+2. Implemented core functionality
+Next, I added interactivity using JavaScript. Users can add, complete, and delete tasks. The filtering logic was the most challenging part, as it required dynamically updating the visible tasks without reloading the page.
 
-### 2. Create the Database Table
+3. Integrated Supabase for persistence
+To move beyond in-memory storage, I connected the app to Supabase. Using async/await, I implemented CRUD operations (fetch, insert, update, delete) with a PostgreSQL database. This ensured that tasks are stored persistently.
 
-1. In Supabase, click **SQL Editor** in the left sidebar
-2. Paste this SQL and click **Run**:
+4. Added an activity log
+I created a separate activity_log table to track all user actions — ADDED, COMPLETED, UNCOMPLETED, and DELETED — along with timestamps. Each interaction is automatically recorded, providing a clear audit trail.
 
-```sql
-create table tasks (
-  id          uuid default gen_random_uuid() primary key,
-  text        text        not null,
-  priority    text        not null default 'medium',
-  completed   boolean     not null default false,
-  created_at  timestamptz not null default now()
-);
+5. Deployed with GitHub and Netlify
+Finally, I pushed the project to GitHub and connected the repository to Netlify. This setup enables continuous deployment, so every push to the main branch automatically updates the live site.
 
--- Allow anonymous read and write (fine for a demo project)
-alter table tasks enable row level security;
-
-create policy "Allow all" on tasks
-  for all using (true) with check (true);
-```
-
-### 3. Get Your API Keys
-
-1. In Supabase, go to **Settings → API**
-2. Copy:
-   - **Project URL** (e.g. `https://abcxyz.supabase.co`)
-   - **anon / public key** (long string starting with `eyJ`)
-
-### 4. Add Keys to app.js
-
-Open `app.js` and replace lines 11–12:
-
-```js
-const SUPABASE_URL      = "https://YOUR-PROJECT.supabase.co";
-const SUPABASE_ANON_KEY = "eyJ...your-anon-key...";
-```
-
-### 5. Test Locally
-
-Open `index.html` in any browser. Tasks you add should appear in the Supabase **Table Editor** under the `tasks` table in real time.
-
-### 6. Deploy to Netlify
-
-1. Push your project to GitHub (see section below)
-2. Go to [netlify.com](https://netlify.com) → **Add new site → Import from Git**
-3. Connect your GitHub repo
-4. Leave all build settings blank (this is a plain HTML/JS project)
-5. Click **Deploy site**
-6. Netlify gives you a live URL like `https://your-app.netlify.app`
-
----
-
-## Pushing to GitHub
-
-```bash
-# First time setup (run in your project folder)
 git init
-git add .
-git commit -m "Initial commit: Project Tasks app"
-
-# Create a new repo at github.com, then:
-git remote add origin https://github.com/YOUR-USERNAME/project-tasks.git
+git add.
+git commit -m "Initial commit — Project Tasks."
+git remote add origin https://github.com/kapry0791/Project-tasks.git
 git branch -M main
 git push -u origin main
-```
 
 ---
 
 ## Where AI Tools Were Used
 
-| What | How AI helped |
-|------|--------------|
-| **HTML structure** | Claude.ai generated the full semantic HTML layout with header, stats bar, form, filter row, and task list |
-| **CSS design** | Claude.ai designed the entire stylesheet — color palette (cream/ink/gold), typography pairing (DM Serif + DM Sans), responsive grid, animations (slideIn, popIn), progress ring |
-| **JavaScript / Supabase** | Claude.ai wrote all CRUD functions — `addTask`, `loadTasks`, `toggleTask`, `deleteTask`, `clearCompleted` — with detailed comments explaining every Supabase API call |
-| **SQL schema** | Claude.ai wrote the `CREATE TABLE` statement and Row Level Security policy |
-| **README** | This file was generated and structured by Claude.ai |
-| **Debugging** | Claude.ai explained how Supabase `.select()`, `.insert()`, `.update()`, `.delete()`, `.eq()`, and `.in()` work, and why `.single()` is needed after `.insert().select()` |
+GitHub Copilot — Had this running in VS Code. It auto-completed a lot of the repetitive JavaScript (like the fetch functions), which saved a lot of time.
+
+ChatGPT (OpenAI) — Used this to ask questions like "what does async/await actually do? What is Supabase Row Level Security, and do I need it? And why is my Netlify deploy failing? — good for quick concept explanations and debugging help.
 
 ---
 
